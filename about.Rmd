@@ -1,0 +1,22 @@
+---
+title: "About this website"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+This website is created for the purpose of P8105 Homework 4.
+
+This website contains:
+
+* a page with brief summary of my academic and professional experience 
+
+* a dashboard page with three plots that give useful information about NYC restaurants' inspections
+
+* links to my GitHub account and my email on the navigation bar.
+
+
+p.s. I don't have other professional networks as I forgot LinkedIn password. It may take a while to retrieve my LinkedIn account, so I might include that in this website in the future. 
+
+
