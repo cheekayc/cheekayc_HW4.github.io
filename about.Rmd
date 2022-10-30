@@ -17,6 +17,7 @@ This website contains:
 * links to my GitHub account and my email on the navigation bar.
 
 
-p.s. I don't have other professional networks as I forgot LinkedIn password. It may take a while to retrieve my LinkedIn account, so I might include that in this website in the future. 
+#### p.s.
+I don't have other professional networks as I forgot my LinkedIn password. It may take a while to retrieve my LinkedIn account, so I might include that in this website in the future. 
 
 
