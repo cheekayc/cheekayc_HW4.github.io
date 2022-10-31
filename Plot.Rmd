@@ -1,0 +1,71 @@
+---
+title: "NYC Restaurant Inspections"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+#### Load packages and data
+
+```{r library, message =  FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+
+data("rest_inspec")
+```
+
+The original dataset is too big, so I am restricting my dataset to inspection that was conducted in 2017.
+```{r restrict dataset, message = FALSE}
+nyc_inspection = 
+  rest_inspec %>% 
+  janitor::clean_names() %>% 
+  filter(inspection_date >= '2017-01-01',
+         boro != "Missing") %>% 
+  rename(borough = boro) %>% 
+  mutate(borough = str_to_title(borough))
+```
+
+Three questions I can answer using this dataset:
+
+1. Which borough has the most distinct restaurant that received grade A in 2017?
+```{r Q1}
+nyc_inspection %>%
+  filter(grade == "A") %>% 
+  group_by(borough) %>% 
+  summarize(n_restaurant = n()) %>% 
+  mutate(borough = fct_reorder(borough, n_restaurant)) %>% 
+  plot_ly(
+    x = ~borough, y = ~n_restaurant, color = ~borough,
+    type = "bar") %>% 
+  layout(title = 'Which borough has the most number of restaurant that received grade A in 2017?', 
+         plot_bgcolor = "#e5ecf6", 
+         xaxis = list(title = 'Borough'), 
+         yaxis = list(title = 'Number of restaurant'), 
+         legend = list(title = list(text = 'Borough')))
+```
+
+
+2. Top 10 cuisine in NYC that received grade A.
+```{r Q2}
+nyc_inspection %>%
+  filter(grade == "A") %>% 
+  group_by(cuisine_description) %>% 
+  summarize(n = n()) %>% 
+  arrange(desc(n)) %>%
+  slice(1:10) %>% 
+  plot_ly(
+    labels = ~cuisine_description,
+    values = ~n,
+    type = 'pie') %>%
+  layout(
+    title = "Top 10 cuisine in NYC that received grade A in 2017 inspection",
+    xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+    yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+    legend = list(title = list(text = 'Type of cuisine')))
+```
+
+
+3. Which type of cuisine are more likely to get flagged?
+
