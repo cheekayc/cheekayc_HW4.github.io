@@ -35,6 +35,13 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -367,6 +374,82 @@ div.tocify {
 
 <div id="load-packages-and-data" class="section level4">
 <h4>Load packages and data</h4>
+<pre class="r"><code>library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+
+data(&quot;rest_inspec&quot;)</code></pre>
+<p>The original dataset is too big, so I am restricting my dataset to
+inspection that was conducted in 2017 and exclude those observations
+that don’t belong to any borough.</p>
+<pre class="r"><code>nyc_inspection = 
+  rest_inspec %&gt;% 
+  janitor::clean_names() %&gt;% 
+  filter(inspection_date &gt;= &#39;2017-01-01&#39;,
+         boro != &quot;Missing&quot;) %&gt;% 
+  rename(borough = boro) %&gt;% 
+  mutate(borough = str_to_title(borough))</code></pre>
+<p>Three questions I can answer using this dataset:</p>
+<ol style="list-style-type: decimal">
+<li>In each borough, how many restaurants were inspected in 2017?</li>
+</ol>
+<pre class="r"><code>nyc_inspection %&gt;%
+  filter(grade == &quot;A&quot;) %&gt;% 
+  group_by(borough) %&gt;% 
+  summarize(n_restaurant = n()) %&gt;% 
+  mutate(borough = fct_reorder(borough, n_restaurant)) %&gt;% 
+  plot_ly(
+    x = ~borough, y = ~n_restaurant, color = ~borough,
+    type = &quot;bar&quot;) %&gt;% 
+  layout(title = &#39;Which borough has the most number of restaurant that received grade A in 2017?&#39;, 
+         plot_bgcolor = &quot;#e5ecf6&quot;, 
+         xaxis = list(title = &#39;Borough&#39;), 
+         yaxis = list(title = &#39;Number of restaurant&#39;), 
+         legend = list(title = list(text = &#39;Borough&#39;)))</code></pre>
+<div id="htmlwidget-b0f5f1493771ffaa3074" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b0f5f1493771ffaa3074">{"x":{"visdat":{"1c1c49fb13db":["function () ","plotlyVisDat"]},"cur_data":"1c1c49fb13db","attrs":{"1c1c49fb13db":{"x":{},"y":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Which borough has the most number of restaurant that received grade A in 2017?","plot_bgcolor":"#e5ecf6","xaxis":{"domain":[0,1],"automargin":true,"title":"Borough","type":"category","categoryorder":"array","categoryarray":["Staten Island","Bronx","Queens","Brooklyn","Manhattan"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Number of restaurant"},"legend":{"title":{"text":"Borough"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["Staten Island"],"y":[1289],"type":"bar","name":"Staten Island","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Bronx"],"y":[3344],"type":"bar","name":"Bronx","marker":{"color":"rgba(252,141,98,1)","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Queens"],"y":[8166],"type":"bar","name":"Queens","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Brooklyn"],"y":[9277],"type":"bar","name":"Brooklyn","marker":{"color":"rgba(231,138,195,1)","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Manhattan"],"y":[14415],"type":"bar","name":"Manhattan","marker":{"color":"rgba(166,216,84,1)","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)"},"error_y":{"color":"rgba(166,216,84,1)"},"error_x":{"color":"rgba(166,216,84,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<ol start="2" style="list-style-type: decimal">
+<li>Among the inspected restaurant in each borough, what proportion of
+them received grade A for their inspections?</li>
+</ol>
+<pre class="r"><code>nyc_inspection %&gt;%
+  filter(grade == &quot;A&quot;) %&gt;% 
+  group_by(cuisine_description) %&gt;% 
+  summarize(n = n()) %&gt;% 
+  arrange(desc(n)) %&gt;%
+  slice(1:10) %&gt;% 
+  plot_ly(
+    labels = ~cuisine_description,
+    values = ~n,
+    type = &#39;pie&#39;) %&gt;%
+  layout(
+    title = &quot;Top 10 cuisine in NYC that received grade A in 2017 inspection&quot;,
+    xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+    yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+    legend = list(title = list(text = &#39;Type of cuisine&#39;)))</code></pre>
+<div id="htmlwidget-3b8a4a8752b49dfd1441" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3b8a4a8752b49dfd1441">{"x":{"visdat":{"1c1c569b7087":["function () ","plotlyVisDat"]},"cur_data":"1c1c569b7087","attrs":{"1c1c569b7087":{"labels":{},"values":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"pie"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Top 10 cuisine in NYC that received grade A in 2017 inspection","xaxis":{"showgrid":false,"zeroline":false,"showticklabels":false},"yaxis":{"showgrid":false,"zeroline":false,"showticklabels":false},"legend":{"title":{"text":"Type of cuisine"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"labels":["American","Chinese","CafÃ©/Coffee/Tea","Pizza","Italian","Mexican","Japanese","Latin (Cuban, Dominican, Puerto Rican, South & Central American)","Bakery","Caribbean"],"values":[8592,3466,2191,1706,1514,1224,1175,1163,1149,947],"type":"pie","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(255,255,255,1)"}},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<ol start="3" style="list-style-type: decimal">
+<li>What is the top 10 most common violation code among the inspected
+restaurants in 2017?</li>
+</ol>
+<pre class="r"><code>nyc_inspection %&gt;% 
+  count(violation_code) %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  slice(1:10)</code></pre>
+<pre><code>## # A tibble: 10 × 2
+##    violation_code     n
+##    &lt;chr&gt;          &lt;int&gt;
+##  1 10F            13252
+##  2 08A            10209
+##  3 04L             6784
+##  4 06C             6732
+##  5 06D             6658
+##  6 10B             6017
+##  7 02G             5709
+##  8 02B             5024
+##  9 04N             4886
+## 10 04H             2026</code></pre>
 </div>
 
 

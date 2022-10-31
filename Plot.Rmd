@@ -16,7 +16,7 @@ library(plotly)
 data("rest_inspec")
 ```
 
-The original dataset is too big, so I am restricting my dataset to inspection that was conducted in 2017.
+The original dataset is too big, so I am restricting my dataset to inspection that was conducted in 2017 and exclude those observations that don't belong to any borough.
 ```{r restrict dataset, message = FALSE}
 nyc_inspection = 
   rest_inspec %>% 
@@ -29,7 +29,7 @@ nyc_inspection =
 
 Three questions I can answer using this dataset:
 
-1. Which borough has the most distinct restaurant that received grade A in 2017?
+1. In each borough, how many restaurants were inspected in 2017?
 ```{r Q1}
 nyc_inspection %>%
   filter(grade == "A") %>% 
@@ -47,7 +47,7 @@ nyc_inspection %>%
 ```
 
 
-2. Top 10 cuisine in NYC that received grade A.
+2. Among the inspected restaurant in each borough, what proportion of them received grade A for their inspections?
 ```{r Q2}
 nyc_inspection %>%
   filter(grade == "A") %>% 
@@ -67,5 +67,11 @@ nyc_inspection %>%
 ```
 
 
-3. Which type of cuisine are more likely to get flagged?
+3. What is the top 10 most common violation code among the inspected restaurants in 2017?
+```{r}
+nyc_inspection %>% 
+  count(violation_code) %>% 
+  arrange(desc(n)) %>% 
+  slice(1:10)
+```
 
