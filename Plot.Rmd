@@ -30,16 +30,18 @@ nyc_inspection =
 Three questions I can answer using this dataset:
 
 1. In each borough, how many restaurants were inspected in 2017?
-```{r Q1}
-nyc_inspection %>%
-  filter(grade == "A") %>% 
+```{r Q1 bar graph}
+rest_insp = tibble(
+  nyc_inspection %>%
   group_by(borough) %>% 
-  summarize(n_restaurant = n()) %>% 
+  summarize(n_restaurant = n())) 
+ 
+rest_insp %>% 
   mutate(borough = fct_reorder(borough, n_restaurant)) %>% 
   plot_ly(
     x = ~borough, y = ~n_restaurant, color = ~borough,
     type = "bar") %>% 
-  layout(title = 'Which borough has the most number of restaurant that received grade A in 2017?', 
+  layout(title = 'Number of restaurants inspected in 2017', 
          plot_bgcolor = "#e5ecf6", 
          xaxis = list(title = 'Borough'), 
          yaxis = list(title = 'Number of restaurant'), 
@@ -48,22 +50,33 @@ nyc_inspection %>%
 
 
 2. Among the inspected restaurant in each borough, what proportion of them received grade A for their inspections?
-```{r Q2}
-nyc_inspection %>%
+```{r Q2 pie chart}
+grade_A = tibble(
+  nyc_inspection %>%
   filter(grade == "A") %>% 
-  group_by(cuisine_description) %>% 
-  summarize(n = n()) %>% 
-  arrange(desc(n)) %>%
-  slice(1:10) %>% 
+  group_by(borough) %>% 
+  summarize(n_A_rest = n()))
+  
+nyc_grade_A = 
+  full_join(rest_insp, grade_A, by = "borough") %>% 
+  mutate(
+    percent_A = (n_A_rest / n_restaurant) * 100,
+    percent_A = round(percent_A, digits = 2))
+
+nyc_grade_A %>% 
   plot_ly(
-    labels = ~cuisine_description,
-    values = ~n,
-    type = 'pie') %>%
+    labels = ~borough,
+    values = ~percent_A,
+    type = 'pie',
+    text = 'percent_A',
+    textposition = "inside",
+    textinfo = "value") %>%
   layout(
-    title = "Top 10 cuisine in NYC that received grade A in 2017 inspection",
+    title = "Proportion of grade A restaurants in each borough (%)",
+    textinfo = 'values',
     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-    legend = list(title = list(text = 'Type of cuisine')))
+    legend = list(title = list(text = 'Borough')))
 ```
 
 
@@ -72,6 +85,7 @@ nyc_inspection %>%
 nyc_inspection %>% 
   count(violation_code) %>% 
   arrange(desc(n)) %>% 
-  slice(1:10)
+  slice(1:10) %>% 
+  knitr::kable()
 ```
 

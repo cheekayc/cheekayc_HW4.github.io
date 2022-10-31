@@ -11,31 +11,86 @@ library(tidyverse)
 library(p8105.datasets)
 library(flexdashboard)
 library(plotly)
+
+data("rest_inspec")
+```
+
+```{r restrict dataset, include = FALSE}
+nyc_inspection = 
+  rest_inspec %>% 
+  janitor::clean_names() %>% 
+  filter(inspection_date >= '2017-01-01',
+         boro != "Missing") %>% 
+  rename(borough = boro) %>% 
+  mutate(borough = str_to_title(borough))
 ```
 
 Column {data-width = 650}
 -----------------------------------------------------------------------
 
-### Which borough has the most number of restaurant that received grade A in 2017?
+### In each borough, how many restaurants were inspected in 2017?
 
-```{r}
-
+```{r Q1}
+rest_insp = tibble(
+  nyc_inspection %>%
+  group_by(borough) %>% 
+  summarize(n_restaurant = n())) 
+ 
+rest_insp %>% 
+  mutate(borough = fct_reorder(borough, n_restaurant)) %>% 
+  plot_ly(
+    x = ~borough, y = ~n_restaurant, color = ~borough,
+    type = "bar") %>% 
+  layout(title = 'Number of restaurants inspected in 2017', 
+         plot_bgcolor = "#e5ecf6", 
+         xaxis = list(title = 'Borough'), 
+         yaxis = list(title = 'Number of restaurant'), 
+         legend = list(title = list(text = 'Borough')))
 ```
 
 
 Column {data-width = 350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Among the inspected restaurant in each borough, what proportion of them received grade A for their inspections?
 
-```{r}
+```{r Q2}
+grade_A = tibble(
+  nyc_inspection %>%
+  filter(grade == "A") %>% 
+  group_by(borough) %>% 
+  summarize(n_A_rest = n()))
+  
+nyc_grade_A = 
+  full_join(rest_insp, grade_A, by = "borough") %>% 
+  mutate(
+    percent_A = (n_A_rest / n_restaurant) * 100,
+    percent_A = round(percent_A, digits = 2))
 
+nyc_grade_A %>% 
+  plot_ly(
+    labels = ~borough,
+    values = ~percent_A,
+    type = 'pie',
+    text = 'percent_A',
+    textposition = "inside",
+    textinfo = "value") %>%
+  layout(
+    title = "Proportion of grade A restaurants in each borough (%)",
+    textinfo = 'values',
+    xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+    yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+    legend = list(title = list(text = 'Borough')))
 ```
 
 
-### Chart C
+### What are the top 10 most common violation codes among the inspected restaurants in 2017?
 
-```{r}
-
+```{r Q3}
+nyc_inspection %>% 
+  count(violation_code) %>% 
+  arrange(desc(n)) %>% 
+  slice(1:10) %>% 
+  knitr::kable()
 ```
 

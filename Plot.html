@@ -393,42 +393,58 @@ that don’t belong to any borough.</p>
 <ol style="list-style-type: decimal">
 <li>In each borough, how many restaurants were inspected in 2017?</li>
 </ol>
-<pre class="r"><code>nyc_inspection %&gt;%
-  filter(grade == &quot;A&quot;) %&gt;% 
+<pre class="r"><code>rest_insp = tibble(
+  nyc_inspection %&gt;%
   group_by(borough) %&gt;% 
-  summarize(n_restaurant = n()) %&gt;% 
+  summarize(n_restaurant = n())) 
+ 
+rest_insp %&gt;% 
   mutate(borough = fct_reorder(borough, n_restaurant)) %&gt;% 
   plot_ly(
     x = ~borough, y = ~n_restaurant, color = ~borough,
     type = &quot;bar&quot;) %&gt;% 
-  layout(title = &#39;Which borough has the most number of restaurant that received grade A in 2017?&#39;, 
+  layout(title = &#39;Number of restaurants inspected in 2017&#39;, 
          plot_bgcolor = &quot;#e5ecf6&quot;, 
          xaxis = list(title = &#39;Borough&#39;), 
          yaxis = list(title = &#39;Number of restaurant&#39;), 
          legend = list(title = list(text = &#39;Borough&#39;)))</code></pre>
-<div id="htmlwidget-962a0a24cce2f356f930" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-962a0a24cce2f356f930">{"x":{"visdat":{"11c53513cb98":["function () ","plotlyVisDat"]},"cur_data":"11c53513cb98","attrs":{"11c53513cb98":{"x":{},"y":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Which borough has the most number of restaurant that received grade A in 2017?","plot_bgcolor":"#e5ecf6","xaxis":{"domain":[0,1],"automargin":true,"title":"Borough","type":"category","categoryorder":"array","categoryarray":["Staten Island","Bronx","Queens","Brooklyn","Manhattan"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Number of restaurant"},"legend":{"title":{"text":"Borough"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["Staten Island"],"y":[1289],"type":"bar","name":"Staten Island","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Bronx"],"y":[3344],"type":"bar","name":"Bronx","marker":{"color":"rgba(252,141,98,1)","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Queens"],"y":[8166],"type":"bar","name":"Queens","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Brooklyn"],"y":[9277],"type":"bar","name":"Brooklyn","marker":{"color":"rgba(231,138,195,1)","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Manhattan"],"y":[14415],"type":"bar","name":"Manhattan","marker":{"color":"rgba(166,216,84,1)","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)"},"error_y":{"color":"rgba(166,216,84,1)"},"error_x":{"color":"rgba(166,216,84,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-30f3bc56b2824743e1a3" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-30f3bc56b2824743e1a3">{"x":{"visdat":{"2eac67dd318b":["function () ","plotlyVisDat"]},"cur_data":"2eac67dd318b","attrs":{"2eac67dd318b":{"x":{},"y":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Number of restaurants inspected in 2017","plot_bgcolor":"#e5ecf6","xaxis":{"domain":[0,1],"automargin":true,"title":"Borough","type":"category","categoryorder":"array","categoryarray":["Staten Island","Bronx","Queens","Brooklyn","Manhattan"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Number of restaurant"},"legend":{"title":{"text":"Borough"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["Staten Island"],"y":[3602],"type":"bar","name":"Staten Island","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Bronx"],"y":[8246],"type":"bar","name":"Bronx","marker":{"color":"rgba(252,141,98,1)","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Queens"],"y":[20849],"type":"bar","name":"Queens","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Brooklyn"],"y":[24967],"type":"bar","name":"Brooklyn","marker":{"color":"rgba(231,138,195,1)","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Manhattan"],"y":[37330],"type":"bar","name":"Manhattan","marker":{"color":"rgba(166,216,84,1)","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)"},"error_y":{"color":"rgba(166,216,84,1)"},"error_x":{"color":"rgba(166,216,84,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <ol start="2" style="list-style-type: decimal">
 <li>Among the inspected restaurant in each borough, what proportion of
 them received grade A for their inspections?</li>
 </ol>
-<pre class="r"><code>nyc_inspection %&gt;%
+<pre class="r"><code>grade_A = tibble(
+  nyc_inspection %&gt;%
   filter(grade == &quot;A&quot;) %&gt;% 
-  group_by(cuisine_description) %&gt;% 
-  summarize(n = n()) %&gt;% 
-  arrange(desc(n)) %&gt;%
-  slice(1:10) %&gt;% 
+  group_by(borough) %&gt;% 
+  summarize(n_A_rest = n()))
+  
+nyc_grade_A = 
+  full_join(rest_insp, grade_A, by = &quot;borough&quot;) %&gt;% 
+  mutate(
+    percent_A = (n_A_rest / n_restaurant) * 100,
+    percent_A = round(percent_A, digits = 2))
+
+nyc_grade_A %&gt;% 
   plot_ly(
-    labels = ~cuisine_description,
-    values = ~n,
-    type = &#39;pie&#39;) %&gt;%
+    labels = ~borough,
+    values = ~percent_A,
+    type = &#39;pie&#39;,
+    text = &#39;percent_A&#39;,
+    textposition = &quot;inside&quot;,
+    textinfo = &quot;value&quot;) %&gt;%
   layout(
-    title = &quot;Top 10 cuisine in NYC that received grade A in 2017 inspection&quot;,
+    title = &quot;Proportion of grade A restaurants in each borough (%)&quot;,
+    textinfo = &#39;values&#39;,
     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-    legend = list(title = list(text = &#39;Type of cuisine&#39;)))</code></pre>
-<div id="htmlwidget-642b03626fd02b0827d6" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-642b03626fd02b0827d6">{"x":{"visdat":{"11c53757e12f9":["function () ","plotlyVisDat"]},"cur_data":"11c53757e12f9","attrs":{"11c53757e12f9":{"labels":{},"values":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"pie"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Top 10 cuisine in NYC that received grade A in 2017 inspection","xaxis":{"showgrid":false,"zeroline":false,"showticklabels":false},"yaxis":{"showgrid":false,"zeroline":false,"showticklabels":false},"legend":{"title":{"text":"Type of cuisine"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"labels":["American","Chinese","CafÃ©/Coffee/Tea","Pizza","Italian","Mexican","Japanese","Latin (Cuban, Dominican, Puerto Rican, South & Central American)","Bakery","Caribbean"],"values":[8592,3466,2191,1706,1514,1224,1175,1163,1149,947],"type":"pie","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(255,255,255,1)"}},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+    legend = list(title = list(text = &#39;Borough&#39;)))</code></pre>
+<pre><code>## Warning: &#39;layout&#39; objects don&#39;t have these attributes: &#39;textinfo&#39;
+## Valid attributes include:
+## &#39;_deprecated&#39;, &#39;activeshape&#39;, &#39;annotations&#39;, &#39;autosize&#39;, &#39;autotypenumbers&#39;, &#39;calendar&#39;, &#39;clickmode&#39;, &#39;coloraxis&#39;, &#39;colorscale&#39;, &#39;colorway&#39;, &#39;computed&#39;, &#39;datarevision&#39;, &#39;dragmode&#39;, &#39;editrevision&#39;, &#39;editType&#39;, &#39;font&#39;, &#39;geo&#39;, &#39;grid&#39;, &#39;height&#39;, &#39;hidesources&#39;, &#39;hoverdistance&#39;, &#39;hoverlabel&#39;, &#39;hovermode&#39;, &#39;images&#39;, &#39;legend&#39;, &#39;mapbox&#39;, &#39;margin&#39;, &#39;meta&#39;, &#39;metasrc&#39;, &#39;modebar&#39;, &#39;newshape&#39;, &#39;paper_bgcolor&#39;, &#39;plot_bgcolor&#39;, &#39;polar&#39;, &#39;scene&#39;, &#39;selectdirection&#39;, &#39;selectionrevision&#39;, &#39;separators&#39;, &#39;shapes&#39;, &#39;showlegend&#39;, &#39;sliders&#39;, &#39;spikedistance&#39;, &#39;template&#39;, &#39;ternary&#39;, &#39;title&#39;, &#39;transition&#39;, &#39;uirevision&#39;, &#39;uniformtext&#39;, &#39;updatemenus&#39;, &#39;width&#39;, &#39;xaxis&#39;, &#39;yaxis&#39;, &#39;barmode&#39;, &#39;bargap&#39;, &#39;mapType&#39;</code></pre>
+<div id="htmlwidget-912da34667607bd69b04" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-912da34667607bd69b04">{"x":{"visdat":{"2eacc3b291":["function () ","plotlyVisDat"]},"cur_data":"2eacc3b291","attrs":{"2eacc3b291":{"labels":{},"values":{},"text":"percent_A","textposition":"inside","textinfo":"value","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"pie"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Proportion of grade A restaurants in each borough (%)","textinfo":"values","xaxis":{"showgrid":false,"zeroline":false,"showticklabels":false},"yaxis":{"showgrid":false,"zeroline":false,"showticklabels":false},"legend":{"title":{"text":"Borough"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"labels":["Bronx","Brooklyn","Manhattan","Queens","Staten Island"],"values":[40.55,37.16,38.62,39.17,35.79],"text":["percent_A","percent_A","percent_A","percent_A","percent_A"],"textposition":["inside","inside","inside","inside","inside"],"textinfo":"value","type":"pie","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(255,255,255,1)"}},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <ol start="3" style="list-style-type: decimal">
 <li>What are the top 10 most common violation codes among the inspected
 restaurants in 2017?</li>
@@ -436,20 +452,58 @@ restaurants in 2017?</li>
 <pre class="r"><code>nyc_inspection %&gt;% 
   count(violation_code) %&gt;% 
   arrange(desc(n)) %&gt;% 
-  slice(1:10)</code></pre>
-<pre><code>## # A tibble: 10 × 2
-##    violation_code     n
-##    &lt;chr&gt;          &lt;int&gt;
-##  1 10F            13252
-##  2 08A            10209
-##  3 04L             6784
-##  4 06C             6732
-##  5 06D             6658
-##  6 10B             6017
-##  7 02G             5709
-##  8 02B             5024
-##  9 04N             4886
-## 10 04H             2026</code></pre>
+  slice(1:10) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">violation_code</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">10F</td>
+<td align="right">13252</td>
+</tr>
+<tr class="even">
+<td align="left">08A</td>
+<td align="right">10209</td>
+</tr>
+<tr class="odd">
+<td align="left">04L</td>
+<td align="right">6784</td>
+</tr>
+<tr class="even">
+<td align="left">06C</td>
+<td align="right">6732</td>
+</tr>
+<tr class="odd">
+<td align="left">06D</td>
+<td align="right">6658</td>
+</tr>
+<tr class="even">
+<td align="left">10B</td>
+<td align="right">6017</td>
+</tr>
+<tr class="odd">
+<td align="left">02G</td>
+<td align="right">5709</td>
+</tr>
+<tr class="even">
+<td align="left">02B</td>
+<td align="right">5024</td>
+</tr>
+<tr class="odd">
+<td align="left">04N</td>
+<td align="right">4886</td>
+</tr>
+<tr class="even">
+<td align="left">04H</td>
+<td align="right">2026</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
