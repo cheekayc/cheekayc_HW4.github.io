@@ -67,8 +67,8 @@ nyc_inspection %>%
 ```
 
 
-3. What is the top 10 most common violation code among the inspected restaurants in 2017?
-```{r}
+3. What are the top 10 most common violation codes among the inspected restaurants in 2017?
+```{r most common violation code}
 nyc_inspection %>% 
   count(violation_code) %>% 
   arrange(desc(n)) %>% 
