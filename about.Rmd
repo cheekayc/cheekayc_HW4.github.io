@@ -12,9 +12,11 @@ This website contains:
 
 * a page with brief summary of my academic and professional experience 
 
-* a dashboard page with three plots that give useful information about NYC restaurants' inspections
+* a page with all the datasets and codes to create plots to put on the dashboard page
 
-* links to my GitHub account and my email on the navigation bar.
+* a dashboard page with three plots and a table that provide some interesting information about NYC restaurant inspections
+
+* some links to my GitHub account and my email on the navigation bar.
 
 
 #### p.s.
