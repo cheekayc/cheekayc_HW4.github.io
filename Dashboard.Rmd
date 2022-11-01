@@ -25,7 +25,7 @@ nyc_inspection =
   mutate(borough = str_to_title(borough))
 ```
 
-Column {data-width = 650}
+Column {data-width = 350}
 -----------------------------------------------------------------------
 
 ### In each borough, how many restaurants were inspected in 2017?
@@ -52,9 +52,29 @@ rest_insp %>%
 Column {data-width = 350}
 -----------------------------------------------------------------------
 
+### How many restaurants in NYC were inspected each day in 2017?
+
+```{r Q2 daily inspection}
+nyc_inspection %>% 
+  group_by(inspection_date) %>% 
+  summarize(inspection_count = n()) %>% 
+  plot_ly(
+    x = ~inspection_date, 
+    y = ~inspection_count,
+    type = 'scatter', 
+    mode = 'lines+markers',
+    line = list(color = 'rgb(204, 204, 204)')) %>% 
+  layout(
+    title = 'Number of restaurant in NYC inspected daily, 2017', 
+         plot_bgcolor = "#e5ecf6", 
+         xaxis = list(title = 'Inspection date (month/year)'), 
+         yaxis = list(title = 'Number of restaurant inspected'))
+```
+
+
 ### Among the inspected restaurant in each borough, what proportion of them received grade A for their inspections?
 
-```{r Q2}
+```{r Q3}
 grade_A = tibble(
   nyc_inspection %>%
   filter(grade == "A") %>% 
@@ -86,7 +106,7 @@ nyc_grade_A %>%
 
 ### What are the top 10 most common violation codes among the inspected restaurants in 2017?
 
-```{r Q3}
+```{r Q4}
 violation = 
   nyc_inspection %>%
   count(violation_code) %>% 

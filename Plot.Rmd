@@ -27,7 +27,7 @@ nyc_inspection =
   mutate(borough = str_to_title(borough))
 ```
 
-Three questions I can answer using this dataset:
+Four questions I can answer using this dataset:
 
 1. In each borough, how many restaurants were inspected in 2017?
 ```{r Q1 bar graph}
@@ -49,8 +49,27 @@ rest_insp %>%
 ```
 
 
-2. Among the inspected restaurant in each borough, what proportion of them received grade A for their inspections?
-```{r Q2 pie chart}
+2. How many restaurants in NYC were inspected each day in 2017?
+```{r Q2 daily inspection}
+nyc_inspection %>% 
+  group_by(inspection_date) %>% 
+  summarize(inspection_count = n()) %>% 
+  plot_ly(
+    x = ~inspection_date, 
+    y = ~inspection_count,
+    type = 'scatter', 
+    mode = 'lines+markers',
+    line = list(color = 'rgb(204, 204, 204)')) %>% 
+  layout(
+    title = 'Number of restaurant in NYC inspected daily, 2017', 
+         plot_bgcolor = "#e5ecf6", 
+         xaxis = list(title = 'Inspection date (month/year)'), 
+         yaxis = list(title = 'Number of restaurant inspected'))
+```
+
+
+3. Among the inspected restaurant in each borough, what proportion of them received grade A for their inspections?
+```{r Q3 pie chart, warning = FALSE}
 grade_A = tibble(
   nyc_inspection %>%
   filter(grade == "A") %>% 
@@ -80,12 +99,35 @@ nyc_grade_A %>%
 ```
 
 
-3. What are the top 10 most common violation codes among the inspected restaurants in 2017?
-```{r most common violation code}
-nyc_inspection %>% 
+4. What are the top 10 most common violation codes among the inspected restaurants in 2017?
+```{r Q4 most common violation code}
+violation = 
+  nyc_inspection %>%
   count(violation_code) %>% 
   arrange(desc(n)) %>% 
-  slice(1:10) %>% 
+  slice(1:10)
+
+violation = 
+  violation %>% 
+  mutate(
+    description = case_when(
+      violation_code == "10F" ~ 'Non-food contact surfaces improperly constructed/maintained',
+      violation_code == "08A" ~ 'Pest-related conditions',
+      violation_code == "04L" ~ 'Evidence of mice',
+      violation_code == "06C" ~ 'Food not protected from contamination',
+      violation_code == "06D" ~ 'Food contact surfaces not clean and sanitized',
+      violation_code == "10B" ~ 'Potable water not protected from backflow / Improper disposal of sewage or liquid waste',
+      violation_code == "02G" ~ 'Cold potentially hazardous food not held at 41F or below',
+      violation_code == "02B" ~ 'Hot potentially hazardous food not held at 140F or above',
+      violation_code == "04N" ~ 'Filth flies',
+      TRUE ~ 'Food not protected from cross-contamination/toxic material')) %>% 
+  rename(n_times_violated = n)
+
+violation %>% 
+  select(violation_code, description, n_times_violated) %>% 
   knitr::kable()
 ```
+
+
+
 
