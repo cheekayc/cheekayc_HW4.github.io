@@ -6,6 +6,10 @@ output:
     toc_float: true
 ---
 
+# 
+
+This is my [resume](Resume.html)
+
 Here is my [dashboard](Dashboard.html)
 
 This [page](Plot.html) contains all the datasets and codes to create graphs on the dashboard. 
