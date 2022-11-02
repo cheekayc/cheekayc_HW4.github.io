@@ -8,8 +8,9 @@ output:
 
 ### Introduction 
 
-Hello, welcome to my website, and my name is Chee Kay Cheong. I am a second-year MPH student at Columbia University Mailman School of Public Health, 
-and I am in the Epidemiology Department. I will be graduating in May, 2022, and I hope to work in the government sector in the future. 
+Hello, welcome to my website. My name is Chee Kay Cheong. I am a second-year MPH student at Columbia University Mailman School of Public
+Health, and I am in the Epidemiology Department. I will be graduating in May, 2022, and I hope to work in the government sector in the
+future. 
 
 
 ### Favorite Sticker
@@ -28,8 +29,6 @@ This is how I look like when I do my P8105 Data Science homework.
 
 I created a page consisting of a brief summary of my academic and professional experience. Click on this [brief resume](Resume.html) to take a quick look at it.
 
-There should also be a file icon on the navigation bar that can lead you to the same page.
-
 
 ### Problem 2
 
@@ -37,7 +36,8 @@ I also created a flexdashboard using `plotly` that includes three distinct plot 
 which is loaded from the `p8105.datasets` package.
 
 
-This [page](Plot.html) contains all the datasets and codes I used to create plots and table on the [dashboard](Dashboard.html). 
+This [page](Plot.html) contains all the datasets and codes I used to create plots and table on the [dashboard](Dashboard.html).
+Or you can simply click on the following links to access these pages.
 
 * **[Codes for plots](Plot.html)**
 
