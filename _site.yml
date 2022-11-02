@@ -5,7 +5,7 @@ navbar:
   right:
     - text: "About"
       href: about.html
-    - icon: fa-solid fa-file-user
+    - icon: fa-solid fa-clone
       href: Resume.html
     - icon: fa-solid fa-envelope
       href: mailto:<cc4778@cumc.columbia.edu>
