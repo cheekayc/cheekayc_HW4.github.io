@@ -1,12 +1,13 @@
 ---
-title: "My Resume"
+title: "My Academic & Professional Experience"
 output: 
   html_document:
     toc: true
     toc_float: true
 ---
 
-## EDUCATION
+### EDUCATION
+
 
 #### Columbia University Mailman School of Public Health, New York, NY
 
@@ -16,7 +17,10 @@ Master of Public Health (MPH), Department of Epidemiology
 
 Certificate of interest: Infectious Disease
 
+Practicum: Research Assistant under the supervision of Dr. Larkin McReynolds
+
 GPA:  3.899
+
 
 #### SUNY College of Environmental Science and Forestry, Syracuse, NY                                                   
 
@@ -28,12 +32,138 @@ GPA: 3.755
 
 Internship: Student volunteer at Crouse Hospital
 
-## HIGHLIGHTED COURSES
 
-Parasitology, Epidemiology, Disease Prevention, Toxicology, Cell Biology, Genetics.
+### Clinical Experience
 
-CERTIFICATES
-Army Traffic Safety Program, Accident Avoidance Course for Army Motor
-Vehicle Drivers
-Level I Antiterrorism Awareness Training
-Global Assessment Tool (GAT)
+#### Crouse Hospital, Syracuse, NY  
+
+09/2018 – 05/2019
+
+##### *Volunteer*
+
+* Interact with patients with regard of their inquiries and needs
+
+* Act as a bridge between nurses and patients
+
+* Assist the RNs at the Post-anesthesia care unit (PACU) with patient care: organizing paperwork, preparing medical documents using Microsoft Office, 
+  preparing beds for the pre-operation prep room, bringing   patients to the pre-operation prep room, serving food and drinks to the patients after 
+  their surgery, cleaning up the area after the patients leave, giving directions from/to the parking lots to patients’ family members, 
+  escorting patients with wheelchair to their vehicles. 
+
+#### Veterans Affairs Medical Center, Syracuse, NY     
+
+02/2018 – 05/2018
+
+##### *Volunteer*
+
+* Pick up and escort patients to their designated destinations (for example, pick up patients from their wards and transport them to the physical therapy department) 
+
+* Answer phone calls from various departments and fulfill their request (pick up and escort patients, deliver blood and urine samples)
+
+* Assist with running lab samples (collect a collective of blood and urine specimens from a department and carefully deliver them to the lab for diagnosis)
+
+
+#### Flushing Rehabilitation Center, Flushing, NY   
+
+08/2012 – 10/2015
+
+##### *Medical Assistant* 
+
+* Register and check in patients
+
+* Confirm patients’ insurance eligibility with insurance companies
+
+* Assist with medical billing
+
+* Manage patient portals and confidential information
+
+* Make follow-up appointments for patients and call patients for reminder of their appointments
+
+* Arrange transportation and radiology services for patients 
+
+* Update and file medical records 
+
+* Prepare the examination room and get ready patients for examinations and treatments, take and record vital signs, sterilize equipment.
+
+* Assisted physician with electromyography test and nerve conduction studies.
+
+* Prepare needles, syringes and medicine for injection.
+
+* Lead patients to the assigned physical therapists.
+
+* Act as a translator between the therapist (English-speaker) and the patients (non-English speakers)
+
+
+### MILITARY SERVICE
+
+##### *Petroleum Supply Specialist*
+
+* Fuel Army vehicles and aircraft and make sure petroleum is handled safely and according to protocol.
+
+* Issue and dispense bulk fuels stored in distribution facilities to Army units that need them.
+
+* Stock bulk and packaged petroleum products and handle accounting duties for any inventory received.
+
+* Select and submit petroleum samples for laboratory testing to ensure quality control criteria are being met.
+
+##### *Automated Logistical Specialist*
+
+* Establish and maintain stock records and other documents such as inventory, material control, accounting and supply reports.
+
+* Unloads, unpacks, visually inspects, counts, segregates, palletizes, and stores incoming supplies and equipment.
+
+##### *COVID-19 Mission*
+
+* Provide security for the warehouse at Oriskany, NY, which contains all sorts of medical equipment needed for the hospitals to combat the pandemic COVID-19.
+
+* Patrol grounds and buildings of the warehouse and guard the post per security management.
+
+* Grant access to areas based on identification and keep logs of visitors.
+
+* Manage and record pedestrian and vehicle traffic at access points.
+
+* Work with EMS fire or police department as required during emergencies.
+
+* Assist supply section supervisor with various duties.
+
+
+### TEACHING EXPERIENCE
+
+##### *Teaching Assistant for ReMA Quant*
+
+* Assist professor with homework grading.
+
+* Lead and guide students through Quant labs weekly.
+
+* Hold office hours to help students with homeworks and questions.
+
+
+##### *College Student Tutor*
+
+* Assist professor with grading homework, quizzes and exams.
+
+* Invigilate Cell Biology exams and Physics quizzes.
+
+* Hold review sessions before every exam.
+
+* Teaching physics, math, and organic chemistry in the Academic Success Center.
+
+* Assist students with homework problems.
+
+* Review contents and materials each class session and make sure students understand each topic.
+
+
+##### *Notetaker for Epidemiology and Toxicology*
+
+* Take notes on each class and check correctness of the materials in class.
+
+* Organize and send notes to the Office of Student Support in order for them to distribute the notes to students who need them (for example, students with disability) 
+
+
+
+
+
+
+
+
+

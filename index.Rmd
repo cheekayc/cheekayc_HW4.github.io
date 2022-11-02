@@ -6,10 +6,41 @@ output:
     toc_float: true
 ---
 
-# 
+### Introduction 
 
-This is my [resume](Resume.html)
+Hello, welcome to my website, and my name is Chee Kay Cheong. I am a second-year MPH student at Columbia University Mailman School of Public Health, 
+and I am in the Epidemiology Department. I will be graduating in May, 2022, and I hope to work in the government sector in the future. 
 
-Here is my [dashboard](Dashboard.html)
 
-This [page](Plot.html) contains all the datasets and codes to create graphs on the dashboard. 
+### Favorite Sticker
+
+I want to introduce to you my favorite sticker. The white panda named "YiEr" and the brown bear named "BuBu". They are a pair of cute couple. 
+
+I used their stickers all the time in WeChat.
+
+![](Images/blow_balloon.gif)
+
+This is how I look like when I do my P8105 Data Science homework.
+
+![](Images/tired.gif)
+
+### Problem 1
+
+I created a page consisting of a brief summary of my academic and professional experience. Click on this [brief resume](Resume.html) to take a quick look at it.
+
+There should also be a file icon on the navigation bar that can lead you to the same page.
+
+
+### Problem 2
+
+I also created a flexdashboard using `plotly` that includes three distinct plot types and a table using the [NYC Restaurant Inspections](https://p8105.com/dataset_restaurant_inspections.html) datasets,
+which is loaded from the `p8105.datasets` package.
+
+
+This [page](Plot.html) contains all the datasets and codes I used to create plots and table on the [dashboard](Dashboard.html). 
+
+* **[Codes for plots](Plot.html)**
+
+* **[Dashboard](Dashboard.html)**
+
+
